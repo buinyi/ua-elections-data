@@ -1,0 +1,523 @@
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.drv.gov.ua/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.drv.gov.ua/">
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://www.drv.gov.ua/">
+<s:element name="RegionsList">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит QUERY_RESULT - кількість знайдених записів. Якщо виникла помилка в процесі роботи, то буде мати значення -1 QUERY_ERROR - текст помилки, що може виникнути в процесі роботи сервісу. Присутній тільки у випадку QUERY_RESULT=-1
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="QUERRY_RESULT" type="s:long" minOccurs="1" maxOccurs="1"/>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="Region" type="tns:RegionType" minOccurs="0" maxOccurs="unbounded"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="RegionType">
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запису про регіон. Region_Id - системний код регіону України; Region_Num - порядковий номер регіону України; Region_Name - повна назва регіону України; Region_Short - скорочена назва регіону України; Region_Center - адміністративний центр регіону України.
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element minOccurs="1" maxOccurs="1" name="Region_Id" type="s:long"/>
+<s:element minOccurs="1" maxOccurs="1" name="Region_Num" type="s:long"/>
+<s:element minOccurs="1" maxOccurs="1" name="Region_Name" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Region_Short" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Region_Center" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="OrgansList">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит QUERY_RESULT - кількість знайдених записів. Якщо виникла помилка в процесі роботи, то буде мати значення -1 QUERY_ERROR - текст помилки, що може виникнути в процесі роботи сервісу. Присутній тільки у випадку QUERY_RESULT=-1
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="QUERRY_RESULT" type="s:long" minOccurs="0" maxOccurs="1"/>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="Organ" maxOccurs="unbounded" minOccurs="0">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запису про ОВР Region_Id - системний код регіону України; Organ_Id - системний код органу ведення Реєстру; Organ_Num - порядковий номер органу ведення Реєстру; Organ_Name - назва органу ведення Реєстру; Organ_Adr - поштова адреса органу ведення Реєстру; Organ_Tel - контактний телефон органу ведення Реєстру;
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element type="s:string" name="Region_Id"/>
+<s:element type="s:long" name="Organ_Id"/>
+<s:element type="s:long" name="Organ_Num"/>
+<s:element type="s:string" name="Organ_Name"/>
+<s:element type="s:string" name="Organ_Adr"/>
+<s:element type="s:string" name="Organ_Tel"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ATO_List" type="tns:ATO_ListType"/>
+<s:complexType name="ATOType">
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запису: REGION_ID - системний код регіону України; ATO_ID - системний код адміністративно-територіальної одиниці; ATO_NAME - назва адміністративно-територіальної одиниці; VOT_D - кількість виборців з виборчою адресою; VOT_V - кількість виборців з відміткою про вибуття з виборчої адреси;
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="REGION_ID" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" name="ATO_ID" type="s:long"/>
+<s:element minOccurs="1" maxOccurs="1" name="ATO_NAME" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="VOT_D" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="VOT_V" type="s:string"/>
+<s:element type="tns:ATO_ListType" name="ATO_List" minOccurs="0"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="ATO_ListType">
+<s:sequence>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="ATO" type="tns:ATOType" maxOccurs="unbounded" minOccurs="0"/>
+</s:sequence>
+<s:attribute type="s:string" name="date" use="optional"/>
+</s:complexType>
+<s:element name="GetAreas">
+<s:complexType>
+<s:sequence> </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetOrgans">
+<s:complexType>
+<s:sequence> </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetRegions">
+<s:complexType>
+<s:sequence> </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetCntVot">
+<s:complexType>
+<s:sequence> </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="AreasList">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит QUERY_RESULT - кількість знайдених записів. Якщо виникла помилка в процесі роботи, то буде мати значення -1 QUERY_ERROR - текст помилки, що може виникнути в процесі роботи сервісу. Присутній тільки у випадку QUERY_RESULT=-1
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="QUERRY_RESULT" type="s:long" minOccurs="0" maxOccurs="1"/>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="Area" type="tns:AreaType" minOccurs="0" maxOccurs="unbounded"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="AreaType">
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запису про виборчий округ. Region_Id - системний код регіону України; Area_Num - номер виборчого округу; Area_Name - назва виборчого округу; Area_Center - центр виборчого округу; Area_Desc - опис меж виборчого округу; Area_OvkAdr - адреса приміщення окружної виборчої комісії; Area_OvkLocation - місцезнаходження приміщення окружної виборчої комісії.
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element minOccurs="1" maxOccurs="1" name="Region_Id" type="s:long"/>
+<s:element minOccurs="1" maxOccurs="1" name="Area_Num" type="s:long"/>
+<s:element minOccurs="1" maxOccurs="1" name="Area_Name" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Area_Center" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Area_Desc" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Area_OvkAdr" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Area_OvkLocation" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="GetPollingStations">
+<s:complexType>
+<s:sequence>
+<s:element name="PSParams" type="tns:QueryPSType"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="QueryPSType">
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запиту про виборчі дільниці. Reg_ID - Код регіону України. (Для отримання переліку закордонних виборчих дільниць залишити порожнім) Area - Номер виборчого округу. (Для отримання переліку закордонних виборчих дільниць вказати 226)
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="Reg_ID" type="s:long" minOccurs="0" maxOccurs="1"/>
+<s:element name="Area" type="s:long" minOccurs="0" maxOccurs="1"/>
+</s:sequence>
+</s:complexType>
+<s:element name="PSList">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит QUERY_RESULT - кількість знайдених записів. Якщо виникла помилка в процесі роботи, то буде мати значення -1 QUERY_ERROR - текст помилки, що може виникнути в процесі роботи сервісу. Присутній тільки у випадку QUERY_RESULT=-1
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="QUERRY_RESULT" type="s:long" minOccurs="0" maxOccurs="1"/>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="PollingStation" maxOccurs="unbounded" minOccurs="0">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запису про виборчу дільницю. Region_Id - системний код регіону України; PS_Area - номер одномандатного виборчого округу; PS_Num - номер виборчої дільниці; PS_Type - тип виборчої дільниці; PS_Desc - опис меж виборчої дільниці; PS_CommissionAdr - адреса приміщення дільничної виборчої комісії; PS_CommissionLocation - місцезнаходження приміщення дільничної виборчої комісії; PS_PlaceVotingAdr - адреса приміщення для голосування; PS_PlaceVotingLocation - місцезнаходження приміщення для голосування; PS_GeoData - геопросторові дані полігону виборчої дільниці; PS_GeoDVK - координати приміщення дільничної виборчої комісії; PS_GeoPG - координати приміщення для голосування; PS_Size - вид виборчої дільниці (мала, середня, велика).
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element type="s:long" name="Region_Id"/>
+<s:element type="s:long" name="PS_Area"/>
+<s:element type="s:long" name="PS_Num"/>
+<s:element type="s:string" name="PS_Type"/>
+<s:element type="s:string" name="PS_Desc"/>
+<s:element type="s:string" name="PS_CommissionAdr"/>
+<s:element type="s:string" name="PS_CommissionLocation"/>
+<s:element type="s:string" name="PS_PlaceVotingAdr"/>
+<s:element type="s:string" name="PS_PlaceVotingLocation"/>
+<s:element type="s:string" name="PS_GeoData"/>
+<s:element type="s:string" name="PS_GeoDVK"/>
+<s:element type="s:string" name="PS_GeoPG"/>
+<s:element type="s:string" name="PS_Size"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetATO">
+<s:complexType>
+<s:sequence>
+<s:element name="ATOParams" type="tns:QueryATUUType"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="QueryATUUType">
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запиту про адміністративно-територіальні одиниці України. Reg_ID - Код регіону України.
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="Reg_ID" type="s:long" minOccurs="1" maxOccurs="1"/>
+</s:sequence>
+</s:complexType>
+<s:element name="ATOList">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит QUERY_RESULT - кількість знайдених записів. Якщо виникла помилка в процесі роботи, то буде мати значення -1 QUERY_ERROR - текст помилки, що може виникнути в процесі роботи сервісу. Присутній тільки у випадку QUERY_RESULT=-1
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="QUERRY_RESULT" type="s:long" minOccurs="0" maxOccurs="1"/>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="ATO" maxOccurs="unbounded" minOccurs="0">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Перелік атрибутів адміністративно-територіальної одиниці (АТО) Region_Id - системний код регіону України; ATO_Raj - назва району/міста обласного значення АТО; ATO_Rad - назва ради значення АТО; ATO_Name - назва АТО; ATO_Id - системний код АТО.
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element type="s:long" name="Region_Id"/>
+<s:element type="s:string" name="ATO_Raj"/>
+<s:element type="s:string" name="ATO_Rad"/>
+<s:element type="s:string" name="ATO_Name"/>
+<s:element type="s:long" name="ATO_Id"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetAdrReg">
+<s:complexType>
+<s:sequence>
+<s:element name="AdrRegParams" type="tns:QueryAdrRegType"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="QueryAdrRegType">
+<s:annotation>
+<s:documentation>
+Перелік атрибутів запиту про адреси. ATO_ID - Код адміністративно-територіальної одиниці (АТО).
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="ATO_ID" type="s:long" minOccurs="1" maxOccurs="1"/>
+</s:sequence>
+</s:complexType>
+<s:element name="GEONIMS">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит QUERY_RESULT - кількість знайдених записів. Якщо виникла помилка в процесі роботи, то буде мати значення -1 QUERY_ERROR - текст помилки, що може виникнути в процесі роботи сервісу. Присутній тільки у випадку QUERY_RESULT=-1
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element name="QUERRY_RESULT" type="s:long" minOccurs="0" maxOccurs="1"/>
+<s:element name="QUERY_ERROR" type="s:string" minOccurs="0" maxOccurs="1"/>
+<s:element name="GEONIM" maxOccurs="unbounded" minOccurs="0">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Перелік атрибутів геоніму. Geon_Id - системний код геоніму; Geon_Name - назва геоніму; Geon_OldNames - попередні назви геоніму.
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element type="s:long" name="Geon_Id"/>
+<s:element type="s:string" name="Geon_Name"/>
+<s:element type="s:string" name="Geon_OldNames"/>
+<s:element name="BUILDS">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Відповідь на запит BUILDS_COUNT - кількість будинків по геоніму;
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element type="s:long" name="BUILDS_COUNT" minOccurs="0" maxOccurs="1"/>
+<s:element name="BUILD" maxOccurs="unbounded" minOccurs="0">
+<s:complexType>
+<s:annotation>
+<s:documentation>
+Перелік атрибутів будинку. Bld_ID - системний код будинку; Bld_Num - номер будинку; Bld_Korp - номер корпусу; Bld_Ind - поштовий індекс будинку; Bld_PS - номер виборчої дільниці; Bld_Area - номер виборчого округу.
+</s:documentation>
+</s:annotation>
+<s:sequence>
+<s:element type="s:long" name="Bld_ID"/>
+<s:element type="s:string" name="Bld_Num"/>
+<s:element type="s:string" name="Bld_Korp"/>
+<s:element type="s:string" name="Bld_Ind"/>
+<s:element type="s:string" name="Bld_PS"/>
+<s:element type="s:string" name="Bld_Area"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="GetRegionsReqMessage">
+<wsdl:part name="parameters" element="tns:GetRegions"/>
+</wsdl:message>
+<wsdl:message name="GetRegionsRespMessage">
+<wsdl:part name="parameters" element="tns:RegionsList"/>
+</wsdl:message>
+<wsdl:message name="GetOrgansReqMessage">
+<wsdl:part name="parameters" element="tns:GetOrgans"/>
+</wsdl:message>
+<wsdl:message name="GetOrgansRespMessage">
+<wsdl:part name="parameters" element="tns:OrgansList"/>
+</wsdl:message>
+<wsdl:message name="GetAreasReqMessage">
+<wsdl:part name="parameters" element="tns:GetAreas"/>
+</wsdl:message>
+<wsdl:message name="GetAreasRespMessage">
+<wsdl:part name="parameters" element="tns:AreasList"/>
+</wsdl:message>
+<wsdl:message name="CntVotReqMessage">
+<wsdl:part name="parameters" element="tns:GetCntVot"/>
+</wsdl:message>
+<wsdl:message name="CntVotRespMessage">
+<wsdl:part name="parameters" element="tns:ATO_List"/>
+</wsdl:message>
+<wsdl:message name="PSRequest">
+<wsdl:part element="tns:GetPollingStations" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="PSResponse">
+<wsdl:part element="tns:PSList" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="ATUURequest">
+<wsdl:part element="tns:GetATO" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="ATUUResponse">
+<wsdl:part element="tns:ATOList" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="AdrRegRequest">
+<wsdl:part element="tns:GetAdrReg" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="AdrRegResponse">
+<wsdl:part element="tns:GEONIMS" name="parameters"/>
+</wsdl:message>
+<wsdl:portType name="GetRegionsPort">
+<wsdl:operation name="GetRegions">
+<wsdl:documentation>Перелік регіонів України</wsdl:documentation>
+<wsdl:input message="tns:GetRegionsReqMessage"/>
+<wsdl:output message="tns:GetRegionsRespMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="GetOrgansPort">
+<wsdl:operation name="GetOrgans">
+<wsdl:documentation>Перелік органів ведення Реєстру</wsdl:documentation>
+<wsdl:input message="tns:GetOrgansReqMessage"/>
+<wsdl:output message="tns:GetOrgansRespMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="GetAreasPort">
+<wsdl:operation name="GetAreas">
+<wsdl:documentation>Перелік виборчих округів</wsdl:documentation>
+<wsdl:input message="tns:GetAreasReqMessage"/>
+<wsdl:output message="tns:GetAreasRespMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="PSPort">
+<wsdl:operation name="PSQuery">
+<wsdl:documentation>Відомості про виборчі дільниці</wsdl:documentation>
+<wsdl:input message="tns:PSRequest"/>
+<wsdl:output message="tns:PSResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="ATUUPort">
+<wsdl:operation name="ATUUQuery">
+<wsdl:documentation>
+Відомості про адміністративно-територіальні одиниці України
+</wsdl:documentation>
+<wsdl:input message="tns:ATUURequest"/>
+<wsdl:output message="tns:ATUUResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="AdrRegPort">
+<wsdl:operation name="AdrRegQuery">
+<wsdl:documentation>Реєстр адрес</wsdl:documentation>
+<wsdl:input message="tns:AdrRegRequest"/>
+<wsdl:output message="tns:AdrRegResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="GetCntVotPort">
+<wsdl:operation name="CntVotQuery">
+<wsdl:documentation>Відомості про кількість виборців</wsdl:documentation>
+<wsdl:input message="tns:CntVotReqMessage"/>
+<wsdl:output message="tns:CntVotRespMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="GetRegions" type="tns:GetRegionsPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="GetRegions">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="GetOrgans" type="tns:GetOrgansPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="GetOrgans">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="GetAreas" type="tns:GetAreasPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="GetAreas">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="GetPollingStations" type="tns:PSPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="PSQuery">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="GetATUU" type="tns:ATUUPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ATUUQuery">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="GetAdrReg" type="tns:AdrRegPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="AdrRegQuery">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="GetCntVot" type="tns:GetCntVotPort">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="CntVotQuery">
+<soap:operation style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="GetRegionsService">
+<wsdl:port name="GetRegionsPort" binding="tns:GetRegions">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+<wsdl:service name="GetOrgansService">
+<wsdl:port name="GetOrgansPort" binding="tns:GetOrgans">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+<wsdl:service name="GetAreasService">
+<wsdl:port name="GetAreasPort" binding="tns:GetAreas">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+<wsdl:service name="GetPSService">
+<wsdl:port name="PSPort" binding="tns:GetPollingStations">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+<wsdl:service name="GetATUUService">
+<wsdl:port name="ATUUPort" binding="tns:GetATUU">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+<wsdl:service name="GetAdrRegService">
+<wsdl:port name="AdrRegPort" binding="tns:GetAdrReg">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+<wsdl:service name="GetCntVotService">
+<wsdl:port name="GetCntVotPort" binding="tns:GetCntVot">
+<soap:address location="https://www.drv.gov.ua/ords/svc/personal/API/Opendata"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
