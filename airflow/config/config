@@ -1,5 +1,5 @@
 [S3]
-BUCKET_NAME=ua-elections-data
+BUCKET_NAME=
 
 [LOCAL]
 LOCAL_ROOT_FOLDER=/tmp/local_storage
