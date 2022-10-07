@@ -1,5 +1,5 @@
 alembic==1.2.1
-apache-airflow==1.10.5
+apache-airflow==2.4.1
 apispec==3.0.0
 appdirs==1.4.3
 asn1crypto==1.0.0
